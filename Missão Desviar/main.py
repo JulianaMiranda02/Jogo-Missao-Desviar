@@ -82,6 +82,8 @@ while rodando:
                 pygame.mixer.music.stop()  # para música de fundo
                 som_colisao.play()  # toca som de game over
 
+                jogador.morrer()  # troca a imagem para "morto"
+
                 game_over = True
 
     tela.blit(fundo, (0, 0))

@@ -6,8 +6,15 @@ class Jogador:
         self.largura_tela = largura_tela
 
         #  Carrega a imagem
-        self.imagem = pygame.image.load("asset/personagem.png").convert_alpha()
-        self.imagem = pygame.transform.scale(self.imagem, (130, 130))
+        self.imagem_vivo = pygame.image.load("asset/personagem.png").convert_alpha()
+        self.imagem_vivo = pygame.transform.scale(self.imagem_vivo, (130, 130))
+
+        # Imagem morto
+        self.imagem_morto = pygame.image.load("asset/personagem_morto.png").convert_alpha()
+        self.imagem_morto = pygame.transform.scale(self.imagem_morto, (130, 130))
+
+        # Começa vivo
+        self.imagem = self.imagem_vivo
 
         # Cria rect baseado na imagem
         self.rect = self.imagem.get_rect()
@@ -15,6 +22,13 @@ class Jogador:
         self.rect.bottom = 580
 
         self.velocidade = 400
+
+        # Flag para controlar estado
+        self.morto = False
+
+    def morrer(self):
+        self.imagem = self.imagem_morto
+        self.morto = True
 
     def mover(self, teclas, dt):
         if teclas[pygame.K_LEFT]:
@@ -30,10 +44,7 @@ class Jogador:
 
 
     def desenhar(self, tela):
-        # pygame.draw.rect(tela, BRANCO,
-        #                  (self.x, self.y, self.largura, self.altura))
         tela.blit(self.imagem, self.rect)
 
     def get_rect(self):
-        # return pygame.Rect(self.x, self.y, self.largura, self.altura)
         return self.rect
