@@ -16,11 +16,11 @@ class Jogador:
 
         self.velocidade = 400
 
-    def mover(self, teclas):
+    def mover(self, teclas, dt):
         if teclas[pygame.K_LEFT]:
-            self.rect.x -= self.velocidade * 0.016
+            self.rect.x -= self.velocidade * dt
         if teclas[pygame.K_RIGHT]:
-            self.rect.x += self.velocidade * 0.016
+            self.rect.x += self.velocidade * dt
 
         #  Limite da tela
         if self.rect.left < 0:

@@ -4,7 +4,10 @@ from code.Jogador import Jogador
 from code.Obstaculo import Obstaculo
 from code.const import *
 
+pygame.mixer.pre_init(44100, -16, 2, 512)
 pygame.init()
+pygame.mixer.init()
+print("Mixer inicializado:", pygame.mixer.get_init())
 
 
 tela = pygame.display.set_mode((LARGURA, ALTURA))
@@ -12,6 +15,14 @@ clock = pygame.time.Clock()
 
 fundo = pygame.image.load("asset/forest_bridge.png")
 fundo = pygame.transform.scale(fundo, (LARGURA, ALTURA))
+
+musica_fundo = "asset/somdojogo.wav"
+pygame.mixer.music.load(musica_fundo)
+pygame.mixer.music.set_volume(0.5)  # volume de 0.0 a 1.0
+pygame.mixer.music.play(-1)  # -1 = loop infinito
+
+som_colisao = pygame.mixer.Sound("asset/gameover.wav")
+
 
 
 jogador = Jogador(LARGURA)
@@ -44,6 +55,7 @@ while rodando:
                 jogador = Jogador(LARGURA)
                 obstaculos = [Obstaculo(LARGURA, ALTURA, TAMANHO_OBSTACULO)]
                 tempo_spawn = 0
+                pygame.mixer.music.play(-1)  # reinicia música
 
     if not game_over:
         tempo += dt
@@ -55,7 +67,7 @@ while rodando:
             tempo_spawn = 0
 
         teclas = pygame.key.get_pressed()
-        jogador.mover(teclas)
+        jogador.mover(teclas, dt)
 
         for obstaculo in obstaculos:
             saiu = obstaculo.atualizar(dt, pontos)
@@ -66,6 +78,10 @@ while rodando:
             if jogador.get_rect().colliderect(obstaculo.get_rect()):
                 if pontos > recorde:
                     recorde = pontos
+
+                pygame.mixer.music.stop()  # para música de fundo
+                som_colisao.play()  # toca som de game over
+
                 game_over = True
 
     tela.blit(fundo, (0, 0))
