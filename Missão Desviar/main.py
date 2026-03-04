@@ -2,7 +2,17 @@ import pygame
 import sys
 from code.Jogador import Jogador
 from code.Obstaculo import Obstaculo
-from code.const import *
+from code.const import (
+    LARGURA,
+    ALTURA,
+    FPS,
+    TAMANHO_OBSTACULO,
+    BRANCO,
+    AMARELO,
+    CIANO,
+    VERMELHO,
+)
+
 
 pygame.mixer.pre_init(44100, -16, 2, 512)
 pygame.init()
@@ -16,25 +26,24 @@ clock = pygame.time.Clock()
 fundo = pygame.image.load("asset/forest_bridge.png")
 fundo = pygame.transform.scale(fundo, (LARGURA, ALTURA))
 
-musica_fundo = "asset/somdojogo.wav"
-pygame.mixer.music.load(musica_fundo)
+
+pygame.mixer.music.load("asset/somdojogo.wav")
 pygame.mixer.music.set_volume(0.5)  # volume de 0.0 a 1.0
 pygame.mixer.music.play(-1)  # -1 = loop infinito
 
 som_colisao = pygame.mixer.Sound("asset/gameover.wav")
-
-
 
 jogador = Jogador(LARGURA)
 obstaculos = [Obstaculo(LARGURA, ALTURA, TAMANHO_OBSTACULO)]
 
 rodando = True
 game_over = False
+
 pontos = 0
 recorde = 0
 tempo = 0
 tempo_spawn = 0
-frequencia_spawn = 2
+frequencia_spawn = 20
 
 fonte_grande = pygame.font.SysFont(None, 80)
 fonte_pequena = pygame.font.SysFont(None, 40)
@@ -44,6 +53,7 @@ while rodando:
     dt = clock.tick(FPS) / 1000
 
     for evento in pygame.event.get():
+
         if evento.type == pygame.QUIT:
             rodando = False
 
@@ -52,19 +62,28 @@ while rodando:
                 pontos = 0
                 tempo = 0
                 game_over = False
+
                 jogador = Jogador(LARGURA)
                 obstaculos = [Obstaculo(LARGURA, ALTURA, TAMANHO_OBSTACULO)]
                 tempo_spawn = 0
                 pygame.mixer.music.play(-1)  # reinicia música
 
     if not game_over:
-        tempo += dt
 
+        tempo += dt
         tempo_spawn += dt
+
         if tempo_spawn >= frequencia_spawn:
             obstaculos.append(
                 Obstaculo(LARGURA, ALTURA, TAMANHO_OBSTACULO))
             tempo_spawn = 0
+
+        if tempo_spawn > 60:
+            frequencia_spawn = 15
+        if tempo_spawn > 120:
+            frequencia_spawn = 10
+        if tempo_spawn > 180:
+            frequencia_spawn = 5
 
         teclas = pygame.key.get_pressed()
         jogador.mover(teclas, dt)
@@ -94,17 +113,17 @@ while rodando:
 
     jogador.desenhar(tela)
 
-    # 🔹 PONTOS
+    # PONTOS
     texto_pontos = fonte_pequena.render(
         f"Pontos: {pontos}", True, BRANCO)
     tela.blit(texto_pontos, (10, 10))
 
-    # 🔹 RECORDE
+    # RECORDE
     texto_recorde = fonte_pequena.render(
         f"Recorde: {recorde}", True, AMARELO)
     tela.blit(texto_recorde, (10, 50))
 
-    # 🔹 TEMPO
+    #  TEMPO
     texto_tempo = fonte_pequena.render(
         f"Tempo: {int(tempo)}s", True, CIANO)
     tela.blit(texto_tempo, (10, 90))

@@ -1,17 +1,19 @@
 import pygame
-from code.const import BRANCO
+
 
 class Jogador:
+
     def __init__(self, largura_tela):
+
         self.largura_tela = largura_tela
 
         #  Carrega a imagem
         self.imagem_vivo = pygame.image.load("asset/personagem.png").convert_alpha()
-        self.imagem_vivo = pygame.transform.scale(self.imagem_vivo, (130, 130))
+        self.imagem_vivo = pygame.transform.scale(self.imagem_vivo, (80, 80))
 
         # Imagem morto
         self.imagem_morto = pygame.image.load("asset/personagem_morto.png").convert_alpha()
-        self.imagem_morto = pygame.transform.scale(self.imagem_morto, (130, 130))
+        self.imagem_morto = pygame.transform.scale(self.imagem_morto, (80, 80))
 
         # Começa vivo
         self.imagem = self.imagem_vivo
@@ -19,10 +21,9 @@ class Jogador:
         # Cria rect baseado na imagem
         self.rect = self.imagem.get_rect()
         self.rect.centerx = largura_tela // 2
-        self.rect.bottom = 580
+        self.rect.bottom = 530
 
         self.velocidade = 400
-
         # Flag para controlar estado
         self.morto = False
 
@@ -31,8 +32,10 @@ class Jogador:
         self.morto = True
 
     def mover(self, teclas, dt):
+
         if teclas[pygame.K_LEFT]:
             self.rect.x -= self.velocidade * dt
+
         if teclas[pygame.K_RIGHT]:
             self.rect.x += self.velocidade * dt
 

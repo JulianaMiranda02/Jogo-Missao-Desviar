@@ -1,9 +1,10 @@
 import pygame
 import random
-from code.const import VERMELHO
 
 class Obstaculo:
+
     def __init__(self, largura_tela, altura_tela, tamanho):
+
         self.largura_tela = largura_tela
         self.altura_tela = altura_tela
         self.tamanho = tamanho
@@ -19,6 +20,7 @@ class Obstaculo:
         self.x = random.randint(0, self.largura_tela - self.tamanho)
 
     def atualizar(self, dt, pontos):
+
         self.y += (200 + pontos * 2) * dt
 
         if self.y > self.altura_tela:
@@ -27,8 +29,6 @@ class Obstaculo:
         return False
 
     def desenhar(self, tela):
-        # pygame.draw.rect(tela, VERMELHO,
-        #                  (self.x, self.y, self.tamanho, self.tamanho))
         tela.blit(self.imagem, (self.x, self.y))
 
     def get_rect(self):
