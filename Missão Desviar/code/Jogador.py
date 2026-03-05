@@ -51,3 +51,4 @@ class Jogador:
 
     def get_rect(self):
         return self.rect
+#murilao bateu 161
