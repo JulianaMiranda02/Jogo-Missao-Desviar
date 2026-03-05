@@ -1,5 +1,5 @@
 import pygame
-from code.const import BRANCO, AMARELO
+from code.Const import BRANCO, AMARELO
 
 
 class Menu:

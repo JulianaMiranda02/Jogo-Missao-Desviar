@@ -5,8 +5,8 @@ from code.Jogador import Jogador
 from code.Menu import Menu
 from code.Obstaculo import Obstaculo
 
-# Importa constantes definidas no arquivo const.py
-from code.const import (
+# Importa constantes definidas no arquivo Const.py
+from code.Const import (
     LARGURA, ALTURA, FPS, TAMANHO_OBSTACULO,
     BRANCO, AMARELO, CIANO, VERMELHO
 )

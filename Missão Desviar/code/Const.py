@@ -1,4 +1,4 @@
-# code/const.py
+# code/Const.py
 
 # TELA
 LARGURA = 800
