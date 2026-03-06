@@ -1,5 +1,5 @@
 import pygame
-from code.Const import BRANCO, AMARELO
+from code.Const import BRANCO, AMARELO, PRETO
 
 
 class Menu:
@@ -11,6 +11,7 @@ class Menu:
         # Fonte do título principal do menu
         self.fonte_titulo = pygame.font.SysFont(None, 90)
         self.fonte_texto = pygame.font.SysFont(None, 30)
+        self.fonte_credito = pygame.font.SysFont("verdana", 18, bold=True)
 
     def desenhar(self, tela, fundo):
         # Desenha o fundo do jogo na tela
@@ -36,6 +37,11 @@ class Menu:
         controle4 = self.fonte_texto.render(
             "ESC  Sair do jogo", True, BRANCO
         )
+
+        credito1 = self.fonte_credito.render("Desenvolvido por", True, PRETO)
+        credito2 = self.fonte_credito.render("Juliana Miranda de Almeida Abreu", True, PRETO)
+        credito3 = self.fonte_credito.render("RU: 4913555", True, PRETO)
+
         # Desenha o título centralizado na tela
         tela.blit(
             titulo,
@@ -65,4 +71,19 @@ class Menu:
         tela.blit(
             controle4,
             (self.largura // 2 - controle4.get_width() // 2, 460)
+        )
+
+        tela.blit(
+            credito1,
+            (self.largura // 2 - credito1.get_width() // 2, 500)
+        )
+
+        tela.blit(
+            credito2,
+            (self.largura // 2 - credito2.get_width() // 2, 530)
+        )
+
+        tela.blit(
+            credito3,
+            (self.largura // 2 - credito3.get_width() // 2, 555)
         )
