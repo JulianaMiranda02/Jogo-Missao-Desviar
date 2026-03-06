@@ -1,5 +1,5 @@
 import pygame
-from code.Const import BRANCO, AMARELO, PRETO
+from code.Const import BRANCO, AMARELO
 
 
 class Menu:
@@ -16,6 +16,10 @@ class Menu:
     def desenhar(self, tela, fundo):
         # Desenha o fundo do jogo na tela
         tela.blit(fundo, (0, 0))
+
+        credito1 = self.fonte_credito.render("Desenvolvido por", True, BRANCO)
+        credito2 = self.fonte_credito.render("Juliana Miranda de Almeida Abreu", True, BRANCO)
+        credito3 = self.fonte_credito.render("RU: 4913555", True, BRANCO)
 
         # Cria os textos do menu
         titulo = self.fonte_titulo.render("MISSÃO DESVIAR", True, AMARELO)
@@ -38,52 +42,50 @@ class Menu:
             "ESC  Sair do jogo", True, BRANCO
         )
 
-        credito1 = self.fonte_credito.render("Desenvolvido por", True, PRETO)
-        credito2 = self.fonte_credito.render("Juliana Miranda de Almeida Abreu", True, PRETO)
-        credito3 = self.fonte_credito.render("RU: 4913555", True, PRETO)
-
-        # Desenha o título centralizado na tela
-        tela.blit(
-            titulo,
-            (self.largura // 2 - titulo.get_width() // 2, 150)
-        )
-        # Desenha instruções do jogo
-        tela.blit(
-            instrucoes,
-            (self.largura // 2 - instrucoes.get_width() // 2, 250)
-        )
-        # Desenha os controles do jogador
-        tela.blit(
-            controle1,
-            (self.largura // 2 - controle1.get_width() // 2, 300)
-        )
-
-        tela.blit(
-            controle2,
-            (self.largura // 2 - controle2.get_width() // 2, 340)
-        )
-        # Opções do menu (iniciar ou sair)
-        tela.blit(
-            controle3,
-            (self.largura // 2 - controle3.get_width() // 2, 420)
-        )
-
-        tela.blit(
-            controle4,
-            (self.largura // 2 - controle4.get_width() // 2, 460)
-        )
-
         tela.blit(
             credito1,
-            (self.largura // 2 - credito1.get_width() // 2, 500)
+            (self.largura // 2 - credito1.get_width() // 2, 40)
         )
 
         tela.blit(
             credito2,
-            (self.largura // 2 - credito2.get_width() // 2, 530)
+            (self.largura // 2 - credito2.get_width() // 2, 70)
         )
 
         tela.blit(
             credito3,
-            (self.largura // 2 - credito3.get_width() // 2, 555)
+            (self.largura // 2 - credito3.get_width() // 2, 100)
         )
+
+        # Desenha o título centralizado na tela
+        tela.blit(
+            titulo,
+            (self.largura // 2 - titulo.get_width() // 2, 170)
+        )
+        # Desenha instruções do jogo
+        tela.blit(
+            instrucoes,
+            (self.largura // 2 - instrucoes.get_width() // 2, 260)
+        )
+        # Desenha os controles do jogador
+        tela.blit(
+            controle1,
+            (self.largura // 2 - controle1.get_width() // 2, 310)
+        )
+
+        tela.blit(
+            controle2,
+            (self.largura // 2 - controle2.get_width() // 2, 350)
+        )
+        # Opções do menu (iniciar ou sair)
+        tela.blit(
+            controle3,
+            (self.largura // 2 - controle3.get_width() // 2, 430)
+        )
+
+        tela.blit(
+            controle4,
+            (self.largura // 2 - controle4.get_width() // 2, 470)
+        )
+
+
