@@ -21,6 +21,11 @@ class Menu:
         credito2 = self.fonte_credito.render("Juliana Miranda de Almeida Abreu", True, BRANCO)
         credito3 = self.fonte_credito.render("RU: 4913555", True, BRANCO)
 
+        # sombras
+        credito1_sombra = self.fonte_credito.render("Desenvolvido por", True, (0, 0, 0))
+        credito2_sombra = self.fonte_credito.render("Juliana Miranda de Almeida Abreu", True, (0, 0, 0))
+        credito3_sombra = self.fonte_credito.render("RU: 4913555", True, (0, 0, 0))
+
         # Cria os textos do menu
         titulo = self.fonte_titulo.render("MISSÃO DESVIAR", True, AMARELO)
         instrucoes = self.fonte_texto.render("Seu objetivo é desviar das pedras", True, AMARELO)
@@ -42,20 +47,23 @@ class Menu:
             "ESC  Sair do jogo", True, BRANCO
         )
 
-        tela.blit(
-            credito1,
-            (self.largura // 2 - credito1.get_width() // 2, 40)
-        )
+        x1 = self.largura // 2 - credito1.get_width() // 2
+        x2 = self.largura // 2 - credito2.get_width() // 2
+        x3 = self.largura // 2 - credito3.get_width() // 2
 
-        tela.blit(
-            credito2,
-            (self.largura // 2 - credito2.get_width() // 2, 70)
-        )
+        y1 = 40
+        y2 = 70
+        y3 = 100
 
-        tela.blit(
-            credito3,
-            (self.largura // 2 - credito3.get_width() // 2, 100)
-        )
+        # sombra
+        tela.blit(credito1_sombra, (x1 + 2, y1 + 2))
+        tela.blit(credito2_sombra, (x2 + 2, y2 + 2))
+        tela.blit(credito3_sombra, (x3 + 2, y3 + 2))
+
+        # texto principal
+        tela.blit(credito1, (x1, y1))
+        tela.blit(credito2, (x2, y2))
+        tela.blit(credito3, (x3, y3))
 
         # Desenha o título centralizado na tela
         tela.blit(
